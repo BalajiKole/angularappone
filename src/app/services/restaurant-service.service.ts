@@ -11,41 +11,43 @@ export class RestaurantServiceService {
   //public imageUrl='http://localhost:8080/data/updaterestimage'
 //  public  displayImageUrl:'http://localhost:8080/data/file';
 
+public ServerUrl='https://zonionproject.herokuapp.com/data';
+public ServerUrlOne:"https://zonionproject.herokuapp.com/data/updaterestimage";
   constructor(private http: HttpClient) {}
 
   public postResto(restoInfo: any): Observable<any> {
     console.log('I am in post method' + restoInfo);
-    return this.http.post(`${environment.ServerUrl}/add`, restoInfo);
+    return this.http.post(`${this.ServerUrl}/add`, restoInfo);
   }
 
   public getRestoById(restoId: any) {
     console.log('I am in get by id method');
-    return this.http.get(`${environment.ServerUrl}/show/${restoId}`);
+    return this.http.get(`${this.ServerUrl}/show/${restoId}`);
   }
 
   public getAllResto(): Observable<any> {
     console.log('I am in get all method');
-    return this.http.get(`${environment.ServerUrl}/show`);
+    return this.http.get(`${this.ServerUrl}/show`);
   }
 
   public changeResto(restoInfo: any) {
     console.log(' I am in  put method');
-    return this.http.put(`${environment.ServerUrl}/change`, restoInfo);
+    return this.http.put(`${this.ServerUrl}/change`, restoInfo);
   }
 
   public deleteById(restoId: any) {
     console.log('I am ni delete method');
-    return this.http.delete(`${environment.ServerUrl}/delete/${restoId}`);
+    return this.http.delete(`${this.ServerUrl}/delete/${restoId}`);
   }
 
   public changeById(id: number, restData: any) {
-    return this.http.put(`${environment.ServerUrl}/change/${id}`, restData);
+    return this.http.put(`${this.ServerUrl}/change/${id}`, restData);
   }
 
   //changeStatus
 
   public setChangedStatus(id:number){
-    return this.http.get(`${environment.ServerUrl}/changestatus/${id}`);
+    return this.http.get(`${this.ServerUrl}/changestatus/${id}`);
   }
 
 
@@ -60,7 +62,7 @@ export class RestaurantServiceService {
     console.log("formdata in service",formdata)
    formdata.append('file', file);
    console.log("Id in addImage service method"+ id)
-    const req = new HttpRequest('PUT', `${environment.ServerUrlOne}/${id}`, formdata, {
+    const req = new HttpRequest('PUT', `${this.ServerUrlOne}/${id}`, formdata, {
       reportProgress: true,
       responseType: 'text'
     }
